@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galleria demo — foto e video</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; color: #222; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+  h2 { text-align: center; }
+  #gallery { background: #fafbfd; }
+
+  /* ---------- Griglia ---------- */
+  #gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .thumb-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #dfe5ec;
+  }
+  .thumb-wrap img,
+  .thumb-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .25s;
+    pointer-events: none; /* i click vanno al contenitore */
+  }
+  .thumb-wrap:hover img,
+  .thumb-wrap:hover video { transform: scale(1.05); }
+
+  /* Badge "play" sulle anteprime dei video */
+  .play-badge {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .play-badge::before {
+    content: '';
+    position: absolute;
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.55);
+  }
+  .play-badge::after {
+    content: '';
+    position: relative;
+    margin-left: 5px;
+    border-style: solid;
+    border-width: 11px 0 11px 19px;
+    border-color: transparent transparent transparent #fff;
+  }
+
+  /* ---------- Lightbox ---------- */
+  #lightbox {
+    position: fixed; inset: 0;
+    background: rgba(10,14,20,.94);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  #lightbox.open { display: flex; }
+  #lb-img, #lb-video {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 6px;
+  }
+  .lb-btn {
+    position: absolute;
+    background: rgba(255,255,255,.12);
+    border: none; color: #fff;
+    font-size: 30px; line-height: 1;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,.25); }
+  .lb-close { top: 16px; right: 16px; }
+  .lb-prev  { left: 16px;  top: 50%; transform: translateY(-50%); }
+  .lb-next  { right: 16px; top: 50%; transform: translateY(-50%); }
+  .lb-counter {
+    position: absolute; top: 24px; left: 24px;
+    color: #cfd6de; font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery">
+  <div class="container">
+    <h2>Recent work</h2>
+    <p style="text-align:center;color:#4a5867;margin-bottom:24px">
+      Foto e video dei lavori. Tocca un'anteprima per aprirla.
+    </p>
+    <div id="gallery-grid"></div>
+    <p id="gallery-empty" style="display:none;text-align:center">Contenuti in arrivo.</p>
+  </div>
+</section>
+
+<!-- ============ LIGHTBOX ============ -->
+<div id="lightbox" role="dialog" aria-label="Media viewer" aria-hidden="true">
+  <span class="lb-counter" id="lb-counter"></span>
+  <button class="lb-btn lb-close" id="lb-close" aria-label="Chiudi">×</button>
+  <button class="lb-btn lb-prev"  id="lb-prev"  aria-label="Precedente">‹</button>
+  <img   id="lb-img" alt="" style="display:none">
+  <video id="lb-video" controls playsinline style="display:none"></video>
+  <button class="lb-btn lb-next"  id="lb-next"  aria-label="Successivo">›</button>
+</div>
+
+<!-- ============ JS: auto-discovery foto+video + lightbox ============ -->
+<script>
+(function(){
+  /* ---------- Auto-discovery in /images ----------
+     Basta caricare file numerati: 1.jpg, 2.mp4, 3.png, 4.webm ...
+     Le estensioni immagine e video vengono provate in ordine.
+  -------------------------------------------------- */
+  var MAX = 80;
+  var IMG_EXT = ['jpg','jpeg','png','webp','JPG','JPEG','PNG','WEBP'];
+  var VID_EXT = ['mp4','webm','MP4','WEBM'];
+  var grid  = document.getElementById('gallery-grid');
+  var empty = document.getElementById('gallery-empty');
+  var found = []; // lista ordinata di {url, type}
+
+  // Prova un indice contro tutte le estensioni con richieste HEAD.
+  // Funziona sia per immagini che per video (GitHub Pages = stessa origine).
+  function probe(i){
+    var candidates = [];
+    IMG_EXT.forEach(function(e){ candidates.push({url:'images/'+i+'.'+e, type:'image'}); });
+    VID_EXT.forEach(function(e){ candidates.push({url:'images/'+i+'.'+e, type:'video'}); });
+    var idx = 0;
+    function tryNext(){
+      if(idx >= candidates.length) return Promise.resolve(null);
+      var c = candidates[idx++];
+      return fetch(c.url, {method:'HEAD'})
+        .then(function(r){ return r.ok ? c : tryNext(); })
+        .catch(tryNext);
+    }
+    return tryNext();
+  }
+
+  // Probing sequenziale (1,2,3,...); si ferma dopo 5 buchi consecutivi.
+  (async function(){
+    var misses = 0;
+    for(var i=1;i<=MAX;i++){
+      var item = await probe(i);
+      if(item){
+        misses = 0;
+        found.push(item);
+
+        var wrap = document.createElement('div');
+        wrap.className = 'thumb-wrap';
+        wrap.dataset.index = found.length - 1;
+
+        if(item.type === 'image'){
+          var img = document.createElement('img');
+          img.loading  = 'lazy';
+          img.decoding = 'async';
+          img.src = item.url;
+          img.alt = 'Foto ' + i;
+          wrap.appendChild(img);
+        } else {
+          var vid = document.createElement('video');
+          // #t=0.1 forza il browser a mostrare il primo frame come anteprima
+          vid.src = item.url + '#t=0.1';
+          vid.preload = 'metadata';
+          vid.muted = true;
+          vid.playsInline = true;
+          wrap.appendChild(vid);
+          var badge = document.createElement('div');
+          badge.className = 'play-badge';
+          wrap.appendChild(badge);
+        }
+
+        wrap.addEventListener('click', function(){
+          openLB(parseInt(this.dataset.index, 10));
+        });
+        grid.appendChild(wrap);
+      } else {
+        misses++;
+        if(misses >= 5) break;
+      }
+    }
+    if(found.length === 0){
+      grid.style.display = 'none';
+      empty.style.display = 'block';
+    }
+  })();
+
+  /* ---------- Lightbox ---------- */
+  var lb      = document.getElementById('lightbox');
+  var lbImg   = document.getElementById('lb-img');
+  var lbVideo = document.getElementById('lb-video');
+  var lbCnt   = document.getElementById('lb-counter');
+  var cur     = 0;
+
+  function openLB(i){
+    if(!found.length) return;
+    cur = i;
+    show();
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLB(){
+    lbVideo.pause();
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+  function show(){
+    var item = found[cur];
+    lbVideo.pause();
+    if(item.type === 'image'){
+      lbVideo.style.display = 'none';
+      lbVideo.removeAttribute('src');
+      lbVideo.load();
+      lbImg.src = item.url;
+      lbImg.style.display = 'block';
+    } else {
+      lbImg.style.display = 'none';
+      lbImg.removeAttribute('src');
+      lbVideo.src = item.url;
+      lbVideo.style.display = 'block';
+    }
+    lbCnt.textContent = (cur+1) + ' / ' + found.length;
+  }
+  function next(){ cur = (cur + 1) % found.length; show(); }
+  function prev(){ cur = (cur - 1 + found.length) % found.length; show(); }
+
+  document.getElementById('lb-close').addEventListener('click', closeLB);
+  document.getElementById('lb-next').addEventListener('click', next);
+  document.getElementById('lb-prev').addEventListener('click', prev);
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeLB(); });
+
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape')          closeLB();
+    else if(e.key === 'ArrowRight') next();
+    else if(e.key === 'ArrowLeft')  prev();
+  });
+
+  // Swipe su mobile (ignorato se il dito è sul video,
+  // per non interferire con la barra di avanzamento)
+  var tx = 0, ty = 0;
+  lb.addEventListener('touchstart', function(e){
+    tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+  }, {passive:true});
+  lb.addEventListener('touchend', function(e){
+    if(e.target === lbVideo) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)){
+      if(dx < 0) next(); else prev();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
