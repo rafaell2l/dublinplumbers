@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b4f8a">
 <title>Dublin Plumbers A2Z — Plumbing, Heating, Bathrooms in Dublin</title>
-<meta name="description" content="Dublin Plumbers A2Z — Nic, a fully insured plumber with 20+ years' experience covering all of Dublin. Plumbing, heating, boilers, bathrooms. Call 086 237 6237.">
+<meta name="description" content="Dublin Plumbers A2Z — Nick, a fully insured plumber with 20+ years' experience covering all of Dublin. Plumbing, heating, boilers, bathrooms. Call 086 237 6237.">
 <link rel="canonical" href="https://www.dublinplumbers-a2z.ie/">
 
 <style>
@@ -95,7 +95,7 @@ header .container{display:flex;align-items:center;justify-content:space-between;
   min-height:100vh;
   min-height:100svh;
   padding:104px 18px calc(clamp(42px,7vw,84px) + 76px);
-  background:#0b2a45;
+  /*background:#0b2a45;*/
   border-bottom:none;
 }
 .hero::before{ /* photo layer — animated separately so the overlay stays crisp */
@@ -104,14 +104,16 @@ header .container{display:flex;align-items:center;justify-content:space-between;
   animation:kenburns 26s ease-in-out infinite alternate;
   will-change:transform;
 }
-.hero::after{ /* light vertical scrim: darker only at the very top and bottom */
+/* light vertical scrim: darker only at the very top and bottom */
+.hero::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,
     rgba(11,42,69,.48) 0%,
-    rgba(11,42,69,.20) 32%,
-    rgba(11,42,69,.24) 66%,
-    rgba(11,42,69,.52) 100%);
+    rgba(11,42,69,.10) 32%,
+    rgba(11,42,69,.14) 66%,
+    rgba(11,42,69,.32) 100%);
 }
+
 @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
 @media (prefers-reduced-motion:reduce){.hero::before{animation:none}}
 
@@ -139,7 +141,7 @@ header .container{display:flex;align-items:center;justify-content:space-between;
 @media (min-width:600px){.hero .lead br{display:inline}}
 .hero .cta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 
-/* ---------- "Nic has it covered" — hand-drawn ink stroke ---------- */
+/* ---------- "Nick has it covered" — hand-drawn ink stroke ---------- */
 .hero .lead .nic{
   position:relative;display:inline-block;
   font-weight:700;color:#fff;
@@ -149,41 +151,6 @@ header .container{display:flex;align-items:center;justify-content:space-between;
   width:104%;height:.5em;
   overflow:visible;pointer-events:none;
 }
-/*
-.nic-stroke path{
-  fill:none;
-  stroke:#12161cca;
-  stroke-width:2.75;
-  stroke-linecap:round;
-  vector-effect:non-scaling-stroke;
-  stroke-dasharray:1;
-  stroke-dashoffset:1;
-  animation:nic-draw 2.8s cubic-bezier(.65,.05,.36,1) 1.3s forwards;
-}
-@keyframes nic-draw{to{stroke-dashoffset:0}}
-@media (prefers-reduced-motion:reduce){
-  .nic-stroke path{animation:none;stroke-dashoffset:0}
-}
-*/
-
-/*
-.nic-stroke path{
-  fill:none;
-  stroke:#12161c;
-  stroke-width:2.75;
-  stroke-linecap:round;
-  vector-effect:non-scaling-stroke;
-  stroke-dasharray:1;
-  stroke-dashoffset:1;
-  animation:
-    nic-draw 3.8s cubic-bezier(.65,.05,.36,1) 1.1s forwards,
-    nic-exit 0.7s cubic-bezier(.55,.06,.68,.19) 6.2s forwards;
-}
-@keyframes nic-draw{to{stroke-dashoffset:0}}
-@keyframes nic-exit{from{stroke-dashoffset:0}to{stroke-dashoffset:-1}}
-@media (prefers-reduced-motion:reduce){
-  .nic-stroke{display:none}
-}*/
 
 .nic-stroke path{
   fill:none;
@@ -287,9 +254,10 @@ header .container{display:flex;align-items:center;justify-content:space-between;
   content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;
   background:linear-gradient(105deg,transparent,rgba(255,255,255,.65),transparent);
   transform:skewX(-20deg);
-  animation:br-shine 4.5s ease-in-out infinite;
+  animation:br-shine 3.5s ease-in-out infinite;
   pointer-events:none;
 }
+
 @keyframes br-shine{
   0%,60%{left:-60%}
   85%,100%{left:130%}
@@ -484,7 +452,7 @@ footer .small{font-size:.8rem;opacity:.7;margin-top:14px}
   <h1>Plumbing from A to Z, across all of Dublin</h1>
   <p class="lead">
     Bathrooms, heating, boilers, repairs and home improvements —<br>
-    whatever your home needs, <br><span class="nic">Nic has it covered<svg class="nic-stroke" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 15 C 55 7, 110 19, 168 12 C 216 6, 258 13, 294 9"/></svg></span>. Over 20 years of experience.
+    whatever your home needs, <br><span class="nic">Nick has it covered<svg class="nic-stroke" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 15 C 55 7, 110 19, 168 12 C 216 6, 258 13, 294 9"/></svg></span>. Over 20 years of experience.
   </p>
   <div class="cta-row">
     <a class="btn btn-primary" href="tel:+353862376237">Call 086 237 6237</a>
@@ -504,13 +472,13 @@ footer .small{font-size:.8rem;opacity:.7;margin-top:14px}
       <div>
         <h2>About</h2>
         <p>
-          Dublin Plumbers A&nbsp;–&nbsp;Z is locally owned by <strong>Nic</strong>, a full-service
+          Dublin Plumbers A&nbsp;–&nbsp;Z is locally owned by <strong>Nick</strong>, a full-service
           plumber covering residential and commercial jobs — from quick repairs to full new
           builds and remodelling.
         </p>
         <p>
           With <strong>over 20 years of experience</strong>, the focus is simple: honest advice,
-          quality work and fair prices. When you call, you speak directly with Nic —
+          quality work and fair prices. When you call, you speak directly with Nick —
           you get a courteous answer, prompt attention and reliable service at a reasonable cost.
         </p>
         <p>
@@ -522,7 +490,7 @@ footer .small{font-size:.8rem;opacity:.7;margin-top:14px}
           <span class="badge">✓ Qualified</span>
           <span class="badge">✓ 20+ years</span>
           <span class="badge">✓ All of Dublin</span>
-          <a class="badge-review br-gold br-shine" href="https://www.google.com/search?q=Dublin+Plumber+A2Z&rlz=1C5AJCO_enIT1205IT1205&oq=Dublin+Plumber+A2Z&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDsyBggCEEUYPDIGCAMQRRg9MgYIBBBFGDzSAQcxNzZqMGo0qAIAsAIB&sourceid=chrome&ie=UTF-8" target="_blank" rel="noopener">★ Leave us a review</a>
+          <a class="badge-review br-gold br-shine" href="https://www.google.com/search?q=Dublin+Plumber+A2Z+Reviews" target="_blank" rel="noopener">★ Leave us a review</a>
         </div>
       </div>
     </div>
@@ -565,7 +533,7 @@ footer .small{font-size:.8rem;opacity:.7;margin-top:14px}
   <div class="container cols-2">
     <h2>Plumbing services</h2>
     <p>If you need a qualified, fully insured plumber in Dublin, you are in the right place.
-    Whether it’s a quick fix or a complex installation, Nic delivers — to the highest standard.</p>
+    Whether it’s a quick fix or a complex installation, Nick delivers — to the highest standard.</p>
     <ul>
       <li>Burst pipes</li>
       <li>Blocked sinks &amp; W.C.s</li>
@@ -613,7 +581,7 @@ footer .small{font-size:.8rem;opacity:.7;margin-top:14px}
   <div class="container">
     <h2>Boilers</h2>
     <p>All gas and oil boilers we fit are <strong>“A” rated</strong>.
-    For honest advice on the best brand for your home, just give Nic a call on
+    For honest advice on the best brand for your home, just give Nick a call on
     <a href="tel:+353862376237">086 237 6237</a>.</p>
 
     <h3 style="margin-top:24px">Gas boiler servicing</h3>
@@ -646,7 +614,7 @@ footer .small{font-size:.8rem;opacity:.7;margin-top:14px}
   <div class="container">
     <h2>Bathrooms</h2>
     <p>Dublin Plumbers A&nbsp;–&nbsp;Z has been installing bathrooms across Dublin for
-    almost 20 years, with the experience and quality to match. Nic offers a full design
+    almost 20 years, with the experience and quality to match. Nick offers a full design
     service: you’ll get plenty of ideas, real advice, and together you’ll arrive at the
     ideal bathroom for your home.</p>
     <p>Every style is possible — sleek modern, atmospheric traditional, luxury contemporary,
@@ -673,7 +641,7 @@ footer .small{font-size:.8rem;opacity:.7;margin-top:14px}
   <div class="container">
     <div class="contact-card">
       <h2 class="center">Get in touch</h2>
-      <p>Have a project, a leak or a question? Talk to Nic directly — no call centre,
+      <p>Have a project, a leak or a question? Talk to Nick directly — no call centre,
       no middleman.</p>
       <p style="font-size:1.15rem;margin-top:18px">
         <strong>📞</strong> <a href="tel:+353862376237">086 237 6237</a><br>
@@ -698,11 +666,11 @@ footer .small{font-size:.8rem;opacity:.7;margin-top:14px}
 
 <!-- ============ STICKY BOTTOM BAR ============ -->
 <nav id="bottom-bar" aria-label="Quick contact">
-  <a class="bb-call" href="tel:+353862376237" aria-label="Call Nic">
+  <a class="bb-call" href="tel:+353862376237" aria-label="Call Nick">
     <svg class="bb-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/>
     </svg>
-    Call Nic
+    Call Nick
   </a>
   <a class="bb-wa" href="https://wa.me/353862376237" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg class="bb-icon" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
