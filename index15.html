@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b4f8a">
+<title>Dublin Plumbers A2Z — Plumbing, Heating, Bathrooms in Dublin</title>
+<meta name="description" content="Dublin Plumbers A2Z — Nick, a fully insured plumber with 20+ years' experience covering all of Dublin. Plumbing, heating, boilers, bathrooms. Call 086 237 6237.">
+<link rel="canonical" href="https://www.dublinplumbers-a2z.ie/">
+
+<style>
+/* ---------- Reset & base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  scroll-padding-top:76px; /* anchors don't hide under the fixed header */
+}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;
+  font-size:17px;line-height:1.55;color:#1d2733;background:#fff;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:#0b4f8a;text-decoration:none;-webkit-tap-highlight-color:transparent}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.2;margin:0 0 .5em;color:#0b2a45}
+h1{font-size:2rem}
+h2{font-size:clamp(1.4rem,4.5vw,1.6rem);margin-top:0}
+/* small brand-red accent under every section title */
+h2::after{
+  content:"";display:block;width:44px;height:3px;border-radius:2px;
+  background:#ed1c24;margin:12px 0 0;
+}
+h2.center::after{margin-left:auto;margin-right:auto}
+h3{font-size:1.15rem;color:#0b4f8a}
+p{margin:0 0 1em}
+ul{padding-left:1.2em;margin:0 0 1em}
+li{margin-bottom:.25em}
+li::marker{color:#0b4f8a}
+
+.container{max-width:1000px;margin:0 auto;padding:0 18px}
+section{
+  padding:clamp(44px,8vw,64px) 0;
+  border-bottom:1px solid #eef1f4;
+  scroll-margin-top:76px;
+}
+section:last-of-type{border-bottom:none}
+
+/* ---------- Reveal on scroll (added by JS; page is fully visible without JS) ---------- */
+.will-reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.will-reveal.revealed{opacity:1;transform:translateY(0)}
+
+/* ---------- Header (transparent over the hero, solid after scrolling) ---------- */
+header{
+  position:fixed;left:0;right:0;top:0;z-index:50;
+  color:#fff;padding:12px 0;
+  background:linear-gradient(180deg,rgba(8,25,42,.45),rgba(8,25,42,0));
+  transition:background .3s ease, box-shadow .3s ease;
+}
+header.scrolled{
+  background:#0b4f8a;
+  box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+header .container{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:nowrap}
+.brand{font-weight:700;font-size:1.05rem;letter-spacing:.3px;text-shadow:0 1px 6px rgba(0,0,0,.25)}
+.brand small{display:block;font-weight:400;font-size:.72rem;opacity:.9;letter-spacing:.5px}
+.main-nav{display:none}
+@media (min-width:860px){
+  .main-nav{display:flex;gap:24px}
+  .main-nav a{color:#fff;font-weight:600;font-size:.95rem;opacity:.92;text-shadow:0 1px 6px rgba(0,0,0,.25)}
+  .main-nav a:hover{opacity:1}
+}
+.top-call{
+  color:#fff;font-weight:700;font-size:.92rem;white-space:nowrap;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.32);
+  padding:8px 14px;border-radius:999px;
+  backdrop-filter:blur(2px);
+  transition:background .15s ease;
+}
+.top-call:hover{text-decoration:none;background:rgba(255,255,255,.28)}
+.top-call::before{content:"☎ "}
+@media (max-width:379px){
+  .brand{font-size:.95rem}
+  .top-call{font-size:.85rem;padding:7px 10px}
+}
+
+/* ---------- Hero: full viewport, light scrim, slow zoom, wave fade-out ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  color:#fff;text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:100vh;
+  min-height:100svh;
+  padding:104px 18px calc(clamp(42px,7vw,84px) + 76px);
+  /*background:#0b2a45;*/
+  border-bottom:none;
+}
+.hero::before{ /* photo layer — animated separately so the overlay stays crisp */
+  content:"";position:absolute;inset:0;
+  background:url("images/hero.jpg") center/cover no-repeat;
+  animation:kenburns 26s ease-in-out infinite alternate;
+  will-change:transform;
+}
+/* light vertical scrim: darker only at the very top and bottom */
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,
+    rgba(11,42,69,.48) 0%,
+    rgba(11,42,69,.10) 32%,
+    rgba(11,42,69,.14) 66%,
+    rgba(11,42,69,.32) 100%);
+}
+
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.hero::before{animation:none}}
+
+.hero .eyebrow,.hero h1,.hero .lead,.hero .cta-row{position:relative;z-index:2}
+.hero .eyebrow{
+  margin:0 0 14px;
+  font-size:.82rem;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:#fff;opacity:.92;
+  text-shadow:0 1px 8px rgba(0,0,0,.35);
+}
+.hero h1{
+  color:#fff;
+  font-size:clamp(1.9rem,6.5vw,2.9rem);
+  margin-bottom:.4em;
+  text-shadow:0 2px 14px rgba(0,0,0,.35);
+}
+.hero p.lead{
+  font-size:clamp(1rem,3.6vw,1.18rem);
+  max-width:640px;margin:0 auto 1.7em;opacity:.97;
+  text-shadow:0 1px 10px rgba(0,0,0,.35);
+}
+/* the manual line breaks only make sense on wider screens;
+   on phones the text flows naturally */
+.hero .lead br{display:none}
+@media (min-width:600px){.hero .lead br{display:inline}}
+.hero .cta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+
+/* ---------- "Nick has it covered" — hand-drawn ink stroke ---------- */
+.hero .lead .nic{
+  position:relative;display:inline-block;
+  font-weight:700;color:#fff;
+}
+.nic-stroke{
+  position:absolute;left:-2%;bottom:-.34em;
+  width:104%;height:.5em;
+  overflow:visible;pointer-events:none;
+}
+
+.nic-stroke path{
+  fill:none;
+  stroke:#12161c;
+  stroke-width:2.75;
+  stroke-linecap:round;
+  vector-effect:non-scaling-stroke;
+  stroke-dasharray:1 1;
+  stroke-dashoffset:3;                 /* 3 ≡ invisibile (equivale a 1) */
+  animation:nic-stroke-run 9.6s linear 1.5s forwards;
+}
+@keyframes nic-stroke-run{
+  0%  {stroke-dashoffset:3; animation-timing-function:cubic-bezier(.65,.05,.36,1)}
+  32% {stroke-dashoffset:2}            /* disegnata (2 ≡ 0): inizio pausa */
+  91% {stroke-dashoffset:2; animation-timing-function:cubic-bezier(.55,.06,.68,.19)}
+  100%{stroke-dashoffset:1}            /* scivolata via */
+}
+@media (prefers-reduced-motion:reduce){
+  .nic-stroke{display:none}
+}
+
+/* wave divider that melts the hero into the page */
+.hero-wave{
+  position:absolute;left:0;bottom:-1px;width:100%;
+  height:clamp(42px,7vw,84px);display:block;z-index:2;
+}
+
+/* gentle "scroll down" cue */
+.scroll-cue{
+  position:absolute;left:50%;z-index:2;
+  bottom:calc(clamp(42px,7vw,84px) + 14px);
+  width:40px;height:34px;opacity:.85;
+  animation:cue 2.2s ease-in-out infinite;
+}
+.scroll-cue::before{
+  content:"";display:block;width:13px;height:13px;margin:8px auto 0;
+  border-right:2.5px solid #fff;border-bottom:2.5px solid #fff;
+  transform:rotate(45deg);
+  filter:drop-shadow(0 1px 4px rgba(0,0,0,.4));
+}
+@keyframes cue{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(8px)}
+}
+@media (prefers-reduced-motion:reduce){.scroll-cue{animation:none;transform:translateX(-50%)}}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-block;padding:14px 22px;border-radius:8px;
+  font-weight:600;font-size:1rem;border:0;cursor:pointer;
+  transition:transform .08s ease, background .15s ease;
+  text-align:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn:hover{text-decoration:none}
+.btn:active{transform:translateY(1px)}
+/*.btn-primary{background:#f08a24;color:#fff}*/
+.btn-primary{background:#ed1c24;color:#fff;box-shadow:0 4px 14px rgba(237,28,36,.32)}
+.btn-primary:hover{background:#c4151d}
+.btn-secondary{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.45)}
+.btn-secondary:hover{background:rgba(255,255,255,.22)}
+
+/* On phones: stack the CTA buttons full-width — bigger tap targets, cleaner look */
+@media (max-width:559px){
+  .cta-row{flex-direction:column;align-items:stretch;max-width:340px;margin-left:auto;margin-right:auto}
+  .cta-row .btn{width:100%}
+}
+
+/* ---------- About / sections ---------- */
+.intro{display:grid;grid-template-columns:1fr;gap:24px;align-items:center}
+.intro .photo{
+  width:100%;max-width:240px;margin:0 auto;
+  aspect-ratio:1/1;border-radius:50%;
+  /*background:#dbe7f1 center/cover no-repeat;*/
+  /*background:#dbe7f1 center/90% no-repeat;*/
+  background:#ffffff center/90% no-repeat;
+  background-image:url("images/logo.jpeg");
+  border:4px solid #fff;box-shadow:0 6px 24px rgba(11,42,69,.14);
+}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#eaf3fb;color:#0b4f8a;
+  padding:6px 12px;border-radius:999px;font-size:.85rem;font-weight:600;
+}
+
+/* ---------- Review button (goes inside .badges) ---------- */
+.badge-review{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 14px;border-radius:999px;
+  font-size:.85rem;font-weight:700;
+  text-decoration:none;cursor:pointer;
+  transition:transform .12s ease, box-shadow .15s ease, background .15s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.badge-review:hover{text-decoration:none;transform:translateY(-1px)}
+.badge-review:active{transform:translateY(0)}
+
+.br-shine{position:relative;overflow:hidden}
+.br-shine::after{
+  content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.65),transparent);
+  transform:skewX(-20deg);
+  animation:br-shine 3.5s ease-in-out infinite;
+  pointer-events:none;
+}
+
+@keyframes br-shine{
+  0%,60%{left:-60%}
+  85%,100%{left:130%}
+}
+@media (prefers-reduced-motion:reduce){.br-shine::after{display:none}}
+
+.br-gold{
+  background:#ffc531;color:#4a3200;
+  box-shadow:0 3px 10px rgba(255,184,0,.35);
+}
+.br-gold:hover{background:#ffb800}
+
+/* ---------- Services grid ---------- */
+.services{display:grid;grid-template-columns:1fr;gap:18px}
+.service{
+  background:#fff;border-radius:14px;padding:24px;
+  border:1px solid #e6ecf2;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.service:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(11,42,69,.10)}
+.service h3{margin-top:0}
+.service .icon{
+  width:44px;height:44px;border-radius:50%;
+  background:#0b4f8a;color:#fff;font-size:1.3rem;
+  display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+}
+
+/* ---------- Two-column lists ---------- */
+.cols-2 ul{columns:1}
+@media (min-width:560px){.cols-2 ul{columns:2;column-gap:30px}}
+
+/* ---------- FAQ (Grants) ---------- */
+details{
+  background:#f7f9fc;border:1px solid #e6ecf2;border-radius:8px;
+  padding:12px 16px;margin-bottom:8px;
+}
+details[open]{background:#fff}
+summary{
+  cursor:pointer;font-weight:600;color:#0b2a45;
+  list-style:none;display:flex;justify-content:space-between;gap:10px;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.3rem;color:#0b4f8a;font-weight:400}
+details[open] summary::after{content:"–"}
+details > *:not(summary){margin-top:10px}
+
+/* ---------- Gallery ---------- */
+#gallery-grid{
+  display:grid;gap:10px;
+  grid-template-columns:repeat(2,1fr);
+}
+@media (min-width:560px){#gallery-grid{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:900px){#gallery-grid{grid-template-columns:repeat(4,1fr)}}
+.thumb{
+  width:100%;aspect-ratio:1/1;object-fit:cover;
+  border-radius:12px;cursor:pointer;background:#eef1f4;
+  transition:transform .18s ease, box-shadow .18s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.thumb:hover{transform:scale(1.025);box-shadow:0 8px 20px rgba(11,42,69,.16)}
+#gallery-empty{color:#6a7684;text-align:center;padding:20px;font-style:italic}
+
+/* Video thumbnails: wrapper + play badge */
+.thumb-wrap{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.thumb-wrap .thumb{pointer-events:none;display:block}
+.thumb-wrap:hover .thumb{transform:scale(1.025);box-shadow:0 8px 20px rgba(11,42,69,.16)}
+.play-badge{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.play-badge::before{
+  content:"▶";color:#fff;font-size:1.15rem;
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(11,42,69,.68);
+  display:flex;align-items:center;justify-content:center;
+  padding-left:4px;
+  box-shadow:0 2px 10px rgba(0,0,0,.35);
+}
+
+/* ---------- Contact panel ---------- */
+.contact-card{
+  background:linear-gradient(135deg,#0b4f8a 0%,#0b2a45 100%);
+  color:#eaf3fb;border-radius:18px;text-align:center;
+  padding:clamp(30px,6vw,52px) clamp(20px,5vw,52px);
+  box-shadow:0 14px 36px rgba(11,42,69,.28);
+}
+.contact-card h2{color:#fff}
+.contact-card a{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.45);text-underline-offset:3px}
+.contact-card a:hover{text-decoration-color:#fff}
+.contact-card .btn,.contact-card .btn:hover{text-decoration:none}
+
+/* ---------- Lightbox ---------- */
+#lightbox{
+  position:fixed;inset:0;background:rgba(8,15,25,.92);
+  display:none;align-items:center;justify-content:center;
+  z-index:200;touch-action:pan-y;
+}
+#lightbox.open{display:flex}
+#lightbox img,
+#lightbox video{
+  max-width:94vw;max-height:82vh;border-radius:6px;
+  box-shadow:0 8px 30px rgba(0,0,0,.4);
+  user-select:none;-webkit-user-drag:none;
+}
+.lb-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,.12);color:#fff;border:0;
+  width:48px;height:48px;border-radius:50%;font-size:1.6rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.lb-btn:hover{background:rgba(255,255,255,.22)}
+.lb-prev{left:12px}
+.lb-next{right:12px}
+.lb-close{
+  position:absolute;
+  top:calc(14px + env(safe-area-inset-top,0px));right:14px;
+  transform:none;width:42px;height:42px;font-size:1.4rem;
+}
+.lb-counter{
+  position:absolute;
+  top:calc(18px + env(safe-area-inset-top,0px));left:18px;color:#fff;
+  font-size:.9rem;background:rgba(0,0,0,.35);
+  padding:4px 10px;border-radius:999px;
+}
+
+/* ---------- Sticky bottom bar (Call + WhatsApp) — mobile only ---------- */
+#bottom-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:80;
+  display:flex;gap:0;
+  box-shadow:0 -2px 12px rgba(0,0,0,.18);
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+#bottom-bar a{
+  flex:1;color:#fff;text-align:center;
+  padding:15px 6px;font-weight:700;font-size:1rem;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  -webkit-tap-highlight-color:transparent;
+}
+#bottom-bar a:hover{text-decoration:none;filter:brightness(1.05)}
+#bottom-bar a:active{filter:brightness(.95)}
+.bb-call{background:#0b4f8a}
+.bb-wa{background:#25d366}
+.bb-icon{width:20px;height:20px;flex-shrink:0}
+
+/* ---------- Footer ---------- */
+footer{
+  background:#0b2a45;color:#cdd7e2;
+  padding:32px 0 calc(96px + env(safe-area-inset-bottom,0px)); /* room for bottom bar */
+  font-size:.92rem;text-align:center;
+}
+footer a{color:#cdd7e2}
+footer .small{font-size:.8rem;opacity:.7;margin-top:14px}
+
+/* ---------- Larger screens ---------- */
+@media (min-width:760px){
+  h1{font-size:2.4rem}
+  .intro{grid-template-columns:280px 1fr;gap:44px}
+  .intro .photo{margin:0;max-width:280px}
+  .services{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:900px){
+  #bottom-bar{display:none} /* on desktop the header & hero CTAs are enough */
+  footer{padding-bottom:36px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="site-header">
+  <div class="container">
+    <div class="brand">
+      <a href="#" style="text-decoration: none; color: inherit;">Dublin Plumbers A2Z</a>
+      <small>Plumbing · Heating · Bathrooms</small>
+    </div>
+    <nav class="main-nav" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="top-call" href="tel:+353862376237">086 237 6237</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <p class="eyebrow">Dublin Plumbers A2Z</p>
+  <h1>Plumbing from A to Z, across all of Dublin</h1>
+  <p class="lead">
+    Bathrooms, heating, boilers, repairs and home improvements —<br>
+    whatever your home needs, <br><span class="nic">Nick has it covered<svg class="nic-stroke" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 15 C 55 7, 110 19, 168 12 C 216 6, 258 13, 294 9"/></svg></span>. Over 20 years of experience.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="tel:+353862376237">Call 086 237 6237</a>
+    <a class="btn btn-secondary" href="https://wa.me/353862376237" target="_blank" rel="noopener">Message on WhatsApp</a>
+  </div>
+  <a class="scroll-cue" href="#about" aria-label="Scroll down"></a>
+  <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,48 C240,80 480,16 760,40 C1040,64 1240,28 1440,44 L1440,80 L0,80 Z" fill="#ffffff"/>
+  </svg>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="container">
+    <div class="intro">
+      <div class="photo" aria-hidden="true"></div>
+      <div>
+        <h2>About</h2>
+        <p>
+          Dublin Plumbers A&nbsp;–&nbsp;Z is locally owned by <strong>Nick</strong>, a full-service
+          plumber covering residential and commercial jobs — from quick repairs to full new
+          builds and remodelling.
+        </p>
+        <p>
+          With <strong>over 20 years of experience</strong>, the focus is simple: honest advice,
+          quality work and fair prices. When you call, you speak directly with Nick —
+          you get a courteous answer, prompt attention and reliable service at a reasonable cost.
+        </p>
+        <p>
+          Pricing is fair and consistent — an accurate reflection of actual labour,
+          materials and overhead. No surprises.
+        </p>
+        <div class="badges">
+          <span class="badge">✓ Fully Insured</span>
+          <span class="badge">✓ Qualified</span>
+          <span class="badge">✓ 20+ years</span>
+          <span class="badge">✓ All of Dublin</span>
+          <a class="badge-review br-gold br-shine" href="https://www.google.com/search?q=Dublin+Plumber+A2Z+Reviews" target="_blank" rel="noopener">★ Leave us a review</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" style="background:#fafbfd">
+  <div class="container">
+    <h2 class="center" style="text-align:center">What We Do</h2>
+    <p style="text-align:center;max-width:640px;margin:0 auto 30px;color:#4a5867">
+      A full plumbing service for homes and businesses across Dublin.
+    </p>
+    <div class="services">
+      <div class="service">
+        <div class="icon">🔧</div>
+        <h3>Plumbing</h3>
+        <p>A qualified and fully insured plumbing service in County Dublin —
+        from a quick repair to a complex installation, carried out to the highest standards
+        at a fair price.</p>
+      </div>
+      <div class="service">
+        <div class="icon">🔥</div>
+        <h3>Boilers &amp; Heating</h3>
+        <p>All gas and oil boilers we install are <strong>“A” rated</strong>.
+        Repairs, servicing, replacements and expert advice on the best brand for your home.</p>
+      </div>
+      <div class="service">
+        <div class="icon">🛁</div>
+        <h3>Bathrooms</h3>
+        <p>Leading bathroom installation experts in Dublin for almost 20 years —
+        full design service, from sleek modern to traditional, contemporary or open wet-rooms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLUMBING DETAILS ============ -->
+<section id="plumbing" style="background:#fafbfd">
+  <div class="container cols-2">
+    <h2>Plumbing services</h2>
+    <p>If you need a qualified, fully insured plumber in Dublin, you are in the right place.
+    Whether it’s a quick fix or a complex installation, Nick delivers — to the highest standard.</p>
+    <ul>
+      <li>Burst pipes</li>
+      <li>Blocked sinks &amp; W.C.s</li>
+      <li>Waste pipes &amp; drains</li>
+      <li>Leaking water mains</li>
+      <li>Attic storage tanks</li>
+      <li>Cylinders</li>
+      <li>Pumps — high &amp; low pressure</li>
+      <li>Downpipes, gullies, shores</li>
+      <li>Garden taps &amp; tap replacements</li>
+      <li>Ballcocks &amp; valve replacements</li>
+      <li>Noise problems</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ HEATING ============ -->
+<section id="heating">
+  <div class="container cols-2">
+    <h2>Heating</h2>
+    <p>There are many heating solutions — but not every one fits every home.
+    Before you choose, talk to a specialist who can guide you to the right option,
+    plan it properly and install it cleanly. Repairs handled for residential and commercial properties.</p>
+    <ul>
+      <li>Gas &amp; oil central heating</li>
+      <li>Repairs &amp; maintenance</li>
+      <li>System upgrades</li>
+      <li>Boiler servicing</li>
+      <li>Boiler replacements</li>
+      <li>Hot tank replacements</li>
+      <li>Radiator repairs &amp; replacements</li>
+      <li>Circulating pump replacements</li>
+      <li>Pressure loss investigation</li>
+      <li>Flushing &amp; cleaning systems</li>
+      <li>Valve repair &amp; replacements</li>
+      <li>Replacement of old pipes</li>
+      <li>Thermostats &amp; time-clocks</li>
+      <li>Immersion repairs</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ BOILERS ============ -->
+<section id="boilers" style="background:#fafbfd">
+  <div class="container">
+    <h2>Boilers</h2>
+    <p>All gas and oil boilers we fit are <strong>“A” rated</strong>.
+    For honest advice on the best brand for your home, just give Nick a call on
+    <a href="tel:+353862376237">086 237 6237</a>.</p>
+
+    <h3 style="margin-top:24px">Gas boiler servicing</h3>
+    <ul>
+      <li>Visual check of flue ways and terminal</li>
+      <li>Combustion air requirements check</li>
+      <li>Working pressure check at meter and appliance</li>
+      <li>Gas rate check for the appliance</li>
+      <li>Gas tightness test</li>
+      <li>Standing pressures check</li>
+      <li>Pilot injectors and seals check</li>
+      <li>Cleaning of fan and burner assembly</li>
+      <li>Flue flow test &amp; spillage test</li>
+    </ul>
+
+    <h3>Oil boiler servicing</h3>
+    <p>A full visual inspection checks for oil leaks in tank, pipes and fittings, signs of
+    corrosion in the flue or boiler parts, and any cracks in the firebox or target wall.
+    The draft regulator is checked to move freely.</p>
+    <p>On the boiler itself: oil shut-off valve operation, flame failure device, draught
+    stabilizer and burner refractory are inspected. Fuel filter and burner nozzle are
+    replaced; spark electrodes, burner diffuser, flame photocell and air tube are cleaned.</p>
+    <p>A combustion efficiency test is performed, along with a thorough inspection of the
+    whole heating system — thermostats, zone valves and radiators included.</p>
+  </div>
+</section>
+
+<!-- ============ BATHROOMS ============ -->
+<section id="bathrooms">
+  <div class="container">
+    <h2>Bathrooms</h2>
+    <p>Dublin Plumbers A&nbsp;–&nbsp;Z has been installing bathrooms across Dublin for
+    almost 20 years, with the experience and quality to match. Nick offers a full design
+    service: you’ll get plenty of ideas, real advice, and together you’ll arrive at the
+    ideal bathroom for your home.</p>
+    <p>Every style is possible — sleek modern, atmospheric traditional, luxury contemporary,
+    or a clean open-plan wet-room. Whatever look you want, it can be done.</p>
+    <p><strong>Free quotation</strong> — just <a href="tel:+353862376237">call</a> or
+    <a href="https://wa.me/353862376237" target="_blank" rel="noopener">message on WhatsApp</a>.</p>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery">
+  <div class="container">
+    <h2 class="center" style="text-align:center">Recent work</h2>
+    <p style="text-align:center;color:#4a5867;margin-bottom:24px">
+      A small selection of jobs around Dublin. Tap any photo to enlarge.
+    </p>
+    <div id="gallery-grid"></div>
+    <p id="gallery-empty" style="display:none">Photos coming soon.</p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" style="background:#fafbfd">
+  <div class="container">
+    <div class="contact-card">
+      <h2 class="center">Get in touch</h2>
+      <p>Have a project, a leak or a question? Talk to Nick directly — no call centre,
+      no middleman.</p>
+      <p style="font-size:1.15rem;margin-top:18px">
+        <strong>📞</strong> <a href="tel:+353862376237">086 237 6237</a><br>
+        <!-- <strong>✉️</strong> <a href="mailto:Info@dublinplumbers-a2z.ie">Info@dublinplumbers-a2z.ie</a>-->
+      </p>
+      <div class="cta-row" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px">
+        <a class="btn btn-primary" href="tel:+353862376237">Call now</a>
+        <a class="btn btn-secondary" style="background:#25d366;color:#fff;border:0"
+           href="https://wa.me/353862376237" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <strong>Dublin Plumbers A2Z</strong> — Plumbing, Heating &amp; Bathrooms across Dublin<br>
+    <span class="small">© 2011–<span id="year"></span> Dublin Plumbers A2Z. All rights reserved.</span>
+  </div>
+</footer>
+
+<!-- ============ STICKY BOTTOM BAR ============ -->
+<nav id="bottom-bar" aria-label="Quick contact">
+  <a class="bb-call" href="tel:+353862376237" aria-label="Call Nick">
+    <svg class="bb-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/>
+    </svg>
+    Call Nick
+  </a>
+  <a class="bb-wa" href="https://wa.me/353862376237" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg class="bb-icon" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+      <path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.5 2.1 7.9L.5 31.5l7.8-2c2.3 1.3 4.9 1.9 7.7 1.9 8.6 0 15.5-6.9 15.5-15.4S24.6.5 16 .5zm0 28.2c-2.5 0-4.9-.7-7-1.9l-.5-.3-4.6 1.2 1.2-4.5-.3-.5a12.7 12.7 0 1 1 23.5-6.7c0 7.1-5.7 12.7-12.3 12.7zm7-9.5c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.2-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.7-.6-3.2-2-1.2-1.1-2-2.4-2.2-2.8-.2-.4 0-.6.2-.8.2-.2.4-.4.6-.7.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.3-3-.3-.8-.7-.7-1-.7h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.4 0 2 1.5 3.9 1.7 4.2.2.3 2.9 4.5 7.1 6.3 1 .4 1.8.7 2.4.9.9.3 1.8.3 2.4.2.7-.1 2.3-.9 2.6-1.9.3-.9.3-1.8.2-1.9-.1-.2-.4-.3-.8-.5z"/>
+    </svg>
+    WhatsApp
+  </a>
+</nav>
+
+<!-- ============ LIGHTBOX ============ -->
+<div id="lightbox" role="dialog" aria-label="Media viewer" aria-hidden="true">
+  <span class="lb-counter" id="lb-counter"></span>
+  <button class="lb-btn lb-close" id="lb-close" aria-label="Close">×</button>
+  <button class="lb-btn lb-prev"  id="lb-prev"  aria-label="Previous">‹</button>
+  <img id="lb-img" alt="">
+  <video id="lb-video" controls playsinline preload="metadata" style="display:none"></video>
+  <button class="lb-btn lb-next"  id="lb-next"  aria-label="Next">›</button>
+</div>
+
+<!-- ============ JS: gallery from gallery.json (/images2) + lightbox ============ -->
+<script>
+(function(){
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- Header: transparent over the hero, solid after scrolling ---------- */
+  var hdr = document.getElementById('site-header');
+  function onScroll(){
+    if(window.scrollY > 40) hdr.classList.add('scrolled');
+    else hdr.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- Subtle reveal-on-scroll (skipped if unsupported or reduced motion) ---------- */
+  if('IntersectionObserver' in window &&
+     !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var revealEls = document.querySelectorAll('section:not(.hero) > .container');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          en.target.classList.add('revealed');
+          io.unobserve(en.target);
+        }
+      });
+    }, {threshold:.08});
+    revealEls.forEach(function(el){
+      el.classList.add('will-reveal');
+      io.observe(el);
+    });
+  }
+
+  /* ---------- Gallery media from /images2 via gallery.json ----------
+     gallery.json is generated automatically by GitHub Actions and
+     contains a JSON array of filenames located in the /images2 folder.
+     Files with unknown extensions (e.g. .txt) are silently skipped.
+     Filenames may contain spaces — they are URL-encoded here.
+  ------------------------------------------------------------------- */
+  var MEDIA_DIR  = 'images2/';
+  var MANIFEST   = 'gallery.json';
+  var IMG_EXT = ['jpg','jpeg','png','webp','gif'];
+  var VID_EXT = ['mp4','webm','mov'];
+  var grid  = document.getElementById('gallery-grid');
+  var empty = document.getElementById('gallery-empty');
+  var found = []; // ordered list of {url, type} — type: 'image' | 'video'
+
+  function typeOf(name){
+    var dot = name.lastIndexOf('.');
+    if(dot < 0) return null;
+    var ext = name.slice(dot + 1).toLowerCase();
+    if(IMG_EXT.indexOf(ext) !== -1) return 'image';
+    if(VID_EXT.indexOf(ext) !== -1) return 'video';
+    return null;
+  }
+
+  function addThumb(item, number){
+    var index = found.length - 1;
+    if(item.type === 'image'){
+      var el = document.createElement('img');
+      el.className = 'thumb';
+      el.loading = 'lazy';
+      el.decoding = 'async';
+      el.src = item.url;
+      el.alt = 'Job photo ' + number;
+      el.dataset.index = index;
+      el.addEventListener('click', function(){ openLB(parseInt(this.dataset.index,10)); });
+      grid.appendChild(el);
+    } else {
+      var wrap = document.createElement('div');
+      wrap.className = 'thumb-wrap';
+      wrap.dataset.index = index;
+      wrap.setAttribute('role','button');
+      wrap.setAttribute('aria-label','Job video ' + number);
+
+      var v = document.createElement('video');
+      v.className = 'thumb';
+      v.muted = true;
+      v.playsInline = true;
+      v.preload = 'metadata';
+      // #t=0.1 forces the first frame to show as poster (helps on iOS)
+      v.src = item.url + '#t=0.1';
+
+      var badge = document.createElement('span');
+      badge.className = 'play-badge';
+      badge.setAttribute('aria-hidden','true');
+
+      wrap.appendChild(v);
+      wrap.appendChild(badge);
+      wrap.addEventListener('click', function(){ openLB(parseInt(this.dataset.index,10)); });
+      grid.appendChild(wrap);
+    }
+  }
+
+  function showEmpty(){
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+  }
+
+  fetch(MANIFEST, {cache:'no-cache'})
+    .then(function(res){
+      if(!res.ok) throw new Error('gallery.json not found');
+      return res.json();
+    })
+    .then(function(files){
+      if(!Array.isArray(files)) throw new Error('gallery.json is not an array');
+      files.forEach(function(name){
+        var type = typeOf(name);
+        if(!type) return; // skip non-media files (e.g. .txt)
+        var item = {url: MEDIA_DIR + encodeURIComponent(name), type: type};
+        found.push(item);
+        addThumb(item, found.length);
+      });
+      if(found.length === 0) showEmpty();
+    })
+    .catch(function(){
+      showEmpty();
+    });
+
+  /* ---------- Lightbox ---------- */
+  var lb     = document.getElementById('lightbox');
+  var lbImg  = document.getElementById('lb-img');
+  var lbVid  = document.getElementById('lb-video');
+  var lbCnt  = document.getElementById('lb-counter');
+  var cur    = 0;
+
+  function stopVideo(){
+    lbVid.pause();
+    lbVid.removeAttribute('src');
+    lbVid.load();
+  }
+
+  function openLB(i){
+    if(!found.length) return;
+    cur = i;
+    show();
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLB(){
+    stopVideo();
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+  function show(){
+    var item = found[cur];
+    lbCnt.textContent = (cur+1) + ' / ' + found.length;
+    if(item.type === 'video'){
+      lbImg.style.display = 'none';
+      lbImg.removeAttribute('src');
+      lbVid.style.display = 'block';
+      lbVid.src = item.url;
+      var p = lbVid.play();
+      if(p && p.catch) p.catch(function(){});
+    } else {
+      stopVideo();
+      lbVid.style.display = 'none';
+      lbImg.style.display = 'block';
+      lbImg.src = item.url;
+    }
+  }
+  function next(){ cur = (cur + 1) % found.length; show(); }
+  function prev(){ cur = (cur - 1 + found.length) % found.length; show(); }
+
+  document.getElementById('lb-close').addEventListener('click', closeLB);
+  document.getElementById('lb-next').addEventListener('click', next);
+  document.getElementById('lb-prev').addEventListener('click', prev);
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeLB(); });
+
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape')      closeLB();
+    else if(e.key === 'ArrowRight') next();
+    else if(e.key === 'ArrowLeft')  prev();
+  });
+
+  // Touch swipe on mobile (ignored when touching the video player,
+  // so it doesn't conflict with the native controls/scrubber)
+  var tx = 0, ty = 0, swipeOK = true;
+  lb.addEventListener('touchstart', function(e){
+    swipeOK = (e.target !== lbVid);
+    tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+  }, {passive:true});
+  lb.addEventListener('touchend', function(e){
+    if(!swipeOK) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)){
+      if(dx < 0) next(); else prev();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
