@@ -1,0 +1,29 @@
+name: Update Gallery Manifest
+
+on:
+  push:
+    paths:
+      - 'images2/**'
+
+jobs:
+  update_json:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Genera Manifest
+        run: python generate_manifest.py
+
+      - name: Commit e Push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Aggiornato gallery.json con le nuove immagini"
